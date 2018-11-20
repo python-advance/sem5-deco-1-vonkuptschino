@@ -1,7 +1,6 @@
 import datetime
 class CalcController(object):
-    """Controller class for Model CalcModel and View CalcView"""
-    
+   
     @staticmethod
     def run():
         while True:
@@ -24,7 +23,9 @@ class CalcController(object):
             except ZeroDivisionError:
                 print("Zero division error")
 
-def log(func):
+class CalcModel(object):
+    
+    def log(func):
         def wrap_log(*args, **kwargs):
             f = open('log.log', 'a')
             ar = str(args)
@@ -36,10 +37,6 @@ def log(func):
     
         return wrap_log
 
-
-class CalcModel(object):
-    
-    
     @staticmethod
     def run_calc(operation, arg1, arg2):
         if operation == 1:
