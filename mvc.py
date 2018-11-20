@@ -1,8 +1,8 @@
 import datetime
 class CalcController(object):
-   
+    
     @staticmethod
-    def run():
+    def start():
         while True:
             CalcView.print_menu()
             operation = CalcView.inp_operation()
@@ -18,10 +18,11 @@ class CalcController(object):
                 continue
 
             try:
-                result = CalcModel.run_calc(operation, operands[0], operands[1])
+                result = CalcModel.start_calc(operation, operands[0], operands[1])
                 CalcView.print_result(result)
             except ZeroDivisionError:
                 print("Zero division error")
+
 
 class CalcModel(object):
     
@@ -36,34 +37,37 @@ class CalcModel(object):
             return func(*args, **kwargs)
     
         return wrap_log
-
+    
     @staticmethod
-    def run_calc(operation, arg1, arg2):
+    def start_calc(operation, op1, op2):
         if operation == 1:
-            return CalcModel.add(arg1, arg2)
+            return CalcModel.add(op1, op2)
         elif operation == 2:
-            return CalcModel.sub(arg1, arg2)
+            return CalcModel.sub(op1, op2)
         elif operation == 3:
-            return CalcModel.mult(arg1, arg2)
+            return CalcModel.mult(op1, op2)
         elif operation == 4:
-            return CalcModel.div(arg1, arg2)
+            return CalcModel.div(op1, op2)
 
     @staticmethod       
     @log
-    def add(a, b):
-        return a + b
+    def add(op1, op2):
+        return op1 + op2
 
     @staticmethod
-    def sub(a, b):
-        return a - b
+    @log
+    def sub(op1, op2):
+        return op1 - op2
 
     @staticmethod
-    def mult(a, b):
-        return a * b
+    @log
+    def mult(op1, op2):
+        return op1 * op2
 
     @staticmethod
-    def div(a, b):
-        return a / b
+    @log
+    def div(op1, op2):
+        return op1 / op2
 
 
 class CalcView(object):
@@ -100,4 +104,4 @@ class CalcView(object):
 
 
 if __name__ == "__main__":
-    CalcController.run()
+    CalcController.start()
